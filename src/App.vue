@@ -1,9 +1,10 @@
 <template>
   <div>
     <SearchBar @termChanged="TermChange"></SearchBar>
-    <VideoList></VideoList>
-
-    {{videos.length}}
+    <VideoList
+      @videoSelect="videoSelect"
+      v-bind:videos="videos"
+    ></VideoList>
   </div>
 </template>
 
@@ -12,7 +13,7 @@
 import SearchBar from "./components/SearchBar";
 import VideoList from "./components/VideoList";
 import axios from "axios";
-const API_KEY = "AIzaSyA7NVn_Y89XpOlolGKGuKWTp93qJvSXAUc";
+const API_KEY = "AIzaSyCGxjr9QXhqD9ZoTL6QldrFvSBZ-2ShZ0U";
 export default {
   name: "App",
   components: {
@@ -23,6 +24,9 @@ export default {
     return { videos: [] };
   },
   methods: {
+    videoSelect(video) {
+      console.log(video);
+    },
     TermChange(searchTerm) {
       axios
         .get("https://www.googleapis.com/youtube/v3/search", {
